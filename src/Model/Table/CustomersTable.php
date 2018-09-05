@@ -73,6 +73,11 @@ class CustomersTable extends Table
             ->allowEmpty('city');
 
         $validator
+            ->integer('plz','Ungueltige Postleitzahl')
+            ->greaterThan('plz',9999,'Ungueltige Postleitzahl')
+            ->lessThan('plz',100000,'Ungueltige Postleitzahl');
+
+        $validator
             ->allowEmpty('street');
 
         return $validator;

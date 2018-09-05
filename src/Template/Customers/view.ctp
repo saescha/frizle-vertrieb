@@ -23,6 +23,10 @@
             <td><?= h($customer->city) ?></td>
         </tr>
         <tr>
+            <th><?= __('Postleitzahl') ?></th>
+            <td><?= h($customer->plz) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Straße') ?></th>
             <td><?= h($customer->street) ?></td>
         </tr>

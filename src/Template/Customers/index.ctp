@@ -17,6 +17,7 @@
 
                 <th><?= $this->Paginator->sort('name','Name') ?></th>
                 <th><?= $this->Paginator->sort('city','Stadt') ?></th>
+                <th><?= $this->Paginator->sort('plz','Postleitzahl') ?></th>
                 <th><?= $this->Paginator->sort('street','Straße') ?></th>
    <!--         <th><?= $this->Paginator->sort('category_id','Kategorie') ?></th>
                 <th><?= $this->Paginator->sort('user_id') ?></th>
@@ -31,6 +32,7 @@
 
                 <td><?= h($customer->name) ?></td>
                 <td><?= h($customer->city) ?></td>
+                <td><?= h($customer->plz) ?></td>
                 <td><?= h($customer->street) ?></td>
           <!--  <td><?= $customer->has('category') ? h($customer->category->name) : '' ?></td>
                 <td><?= $customer->has('user') ? $this->Html->link($customer->user->username, ['controller' => 'Users', 'action' => 'view', $customer->user->id]) : '' ?></td>
