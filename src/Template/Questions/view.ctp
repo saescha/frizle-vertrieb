@@ -2,7 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
         <li><?= $this->Html->link(__('Frage bearbeiten'), ['action' => 'edit', $question->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Frage entfernen'), ['action' => 'delete', $question->id], ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/questions/delete/<?= $question->id ?>' );"> Frage löschen </a>
         <li><?= $this->Html->link(__('Alle Fragen'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Neue Frage anlegen'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('Alle Antwortsmöglichkeiten'), ['controller' => 'Choices', 'action' => 'index']) ?> </li>
@@ -63,7 +63,6 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['controller' => 'Choices', 'action' => 'view', $choices->id]) ?>
                     <?= $this->Html->link(__('Bearbeiten'), ['controller' => 'Choices', 'action' => 'edit', $choices->id]) ?>
-                    <?= $this->Form->postLink(__('Entfernen'), ['controller' => 'Choices', 'action' => 'delete', $choices->id], ['confirm' => __('Are you sure you want to delete # {0}?', $choices->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

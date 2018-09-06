@@ -3,7 +3,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
         <li><?= $this->Html->link(__('Kontaktperson ändern'), ['action' => 'edit', $person->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Kontaktperson löschen'), ['action' => 'delete', $person->id], ['confirm' => __('Are you sure you want to delete # {0}?', $person->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/persons/delete/<?= $person->id ?>' );"> Kontaktperson löschen </a>
         <li><?= $this->Html->link(__('Kontaktpersonen verwalten'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Neue Kontaktperson'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('Märkte verwalten'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
