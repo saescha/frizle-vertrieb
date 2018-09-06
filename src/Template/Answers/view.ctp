@@ -2,7 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
         <li><?= $this->Html->link(__('Edit Answer'), ['action' => 'edit', $answer->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Answer'), ['action' => 'delete', $answer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $answer->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/answers/delete/<?= $answer->id ?>' );"> Antwort löschen </a>
         <li><?= $this->Html->link(__('List Answers'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Answer'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Choices'), ['controller' => 'Choices', 'action' => 'index']) ?> </li>

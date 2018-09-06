@@ -1,9 +1,9 @@
-<?php $this->assign('title','Märkte'); ?>
+<?php $this->assign('title', 'Märkte'); ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
         <li><?= $this->Html->link(__('Markt bearbeiten'), ['action' => 'edit', $customer->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Markt löschen'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/customers/delete/<?= $customer->id ?>' );"> Markt löschen </a>
                 <li><?= $this->Html->link(__('Kontaktformular zu diesem Markt erstellen'), ['controller' => 'Questions', 'action' => 'answer',$customer->id]) ?> </li>
                 <li><?= $this->Html->link(__('Kontaktperson zu diesem Markt erstellen'), ['controller' => 'Persons', 'action' => 'add',$customer->id]) ?> </li>
                 <li><?= $this->Html->link(__('Verkostungstermin zu diesem Markt erstellen'), ['controller' => 'Events', 'action' => 'add',$customer->id]) ?> </li>
@@ -32,7 +32,7 @@
         </tr>
                 <tr>
             <th><?= __('Kategorie') ?></th>
-            <td><?= $customer->has('category') ? h($customer->category->name ) : '' ?></td>
+            <td><?= $customer->has('category') ? h($customer->category->name) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('User') ?></th>
@@ -90,8 +90,8 @@
             </tr>
             <?php foreach ($customer->events as $event): ?>
             <tr>
-                <td><?= date_format($event->date,'d.m.Y' ) ?></td>
-                <td><?php switch ($event->status){
+                <td><?= date_format($event->date, 'd.m.Y') ?></td>
+                <td><?php switch ($event->status) {
 
                                                         case 'O': echo 'Offen';break;
                                                         case 'P': echo 'Geplant';break;
@@ -121,7 +121,7 @@
             <?php foreach ($customer->forms as $forms): ?>
             <tr>
 
-                <td><?= date_format($forms->created,'d.m.Y H:i' ) ?></td>
+                <td><?= date_format($forms->created, 'd.m.Y H:i') ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['controller' => 'Forms', 'action' => 'view', $forms->id]) ?>
                     <?= $this->Html->link(__('Bearbeiten'), ['controller' => 'Forms', 'action' => 'edit', $forms->id]) ?>

@@ -2,6 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/users/delete/<?= $user->id ?>' );"> User l√∂schen </a>
         <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
@@ -40,7 +41,7 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Assoziierte M‰rkte') ?></h4>
+        <h4><?= __('Assoziierte MÔøΩrkte') ?></h4>
         <?php if (!empty($user->customers)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>

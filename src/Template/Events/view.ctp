@@ -3,7 +3,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Verkostung bearbeiten'), ['action' => 'edit', $event->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Verkostung entfernen'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/events/delete/<?= $event->id ?>' );"> Verkostung löschen </a>
         <li><?= $this->Html->link(__('Alle Verkostungen'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Neue Verkostung eintragen'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('Alle Märkte'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
