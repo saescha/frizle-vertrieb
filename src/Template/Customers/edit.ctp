@@ -2,14 +2,6 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Löschen'),
-                ['action' => 'delete', $customer->id],
-                [ 'escape' => false,
-                  'confirm' => __('Sind Sie sich sicher? # {0}?', $customer->id)]
-            )
-            
-        ?></li>
         <li><?= $this->Html->link(__('Märkte verwalten'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Alle User'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('User anlegen'), ['controller' => 'Users', 'action' => 'add']) ?></li>

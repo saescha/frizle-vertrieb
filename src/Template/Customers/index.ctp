@@ -40,8 +40,6 @@
                 <td><?= date_format($customer->modified,'d.m.Y H:i' ) ?></td> -->
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['action' => 'view', $customer->id]) ?>
-                <!--                <?= $this->Html->link(__('Ändern'), ['action' => 'edit', $customer->id]) ?>
-                    <?= $this->Form->postLink(__('Löschen'), ['action' => 'delete', $customer->id], ['confirm' => __('Sind sie sicher?', $customer->id)]) ?> -->
                 </td>
             </tr>
             <?php endforeach; ?>

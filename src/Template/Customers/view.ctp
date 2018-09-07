@@ -70,8 +70,6 @@
                 <td><?= $person->email ?></td> -->
                 <td class="actions">
                     <?= $this->Html->link(__('Details'), ['controller' => 'Persons', 'action' => 'view', $person->id]) ?>
-                <!--    <?= $this->Html->link(__('Edit'), ['controller' => 'Persons', 'action' => 'edit', $person->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Persons', 'action' => 'delete', $person->id], ['confirm' => __('Are you sure you want to delete # {0}?', $person->last_name)]) ?> -->
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -102,7 +100,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['controller' => 'Events', 'action' => 'view', $event->id]) ?>
                     <?= $this->Html->link(__('Bearbeiten'), ['controller' => 'Events', 'action' => 'edit', $event->id]) ?>
-                    <?= $this->Form->postLink(__('Löschen'), ['controller' => 'Events', 'action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->last_name)]) ?>
+
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -125,7 +123,6 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['controller' => 'Forms', 'action' => 'view', $forms->id]) ?>
                     <?= $this->Html->link(__('Bearbeiten'), ['controller' => 'Forms', 'action' => 'edit', $forms->id]) ?>
-                    <?= $this->Form->postLink(__('Löschen'), ['controller' => 'Forms', 'action' => 'delete', $forms->id], ['confirm' => __('Are you sure you want to delete # {0}?', $forms->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

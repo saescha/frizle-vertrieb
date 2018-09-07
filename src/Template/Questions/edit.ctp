@@ -1,12 +1,6 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $question->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]
-            )
-        ?></li>
         <li><?= $this->Html->link(__('Alle Fragen'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Alle Antwortsmöglichkeiten'), ['controller' => 'Choices', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Neue Antwortsmöglichkeit'), ['controller' => 'Choices', 'action' => 'add']) ?></li>

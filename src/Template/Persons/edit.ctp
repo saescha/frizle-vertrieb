@@ -2,12 +2,6 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'Löschen', $person->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $person->id)]
-            )
-        ?></li>
         <li><?= $this->Html->link(__('Kontaktpersonen verwalten'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Märkte verwalten'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Neuen Markt anlegen'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
