@@ -71,13 +71,13 @@ class CustomersController extends AppController
 		
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
-            $customer = $this->Customers->patchEntity($customer, $this->request->data->Customer);
+            $customer = $this->Customers->patchEntity($customer, $this->request->data['Customer']);
 			if ( $this->Auth->user('role') == 'user'){
 			$customer->user_id = $this->Auth->user('id');
 			}
             if ($this->Customers->save($customer)) {
 				$this->loadModel('Answers');
-				foreach( $this->request->data->Question as $k => $d ){
+				foreach( $this->request->data['Question'] as $k => $d ){
 					if( !empty($d)){
 
 					if(is_int( $k ) ){
@@ -140,7 +140,7 @@ class CustomersController extends AppController
             if ($this->Customers->save($customer)) {
 				$this->loadModel('Answers');
 				$this->Answers->deleteAll(['customer_id = ' => $customer->id]);
-				foreach( $this->request->data as $k => $d ){
+				foreach( $this->request->data['Question'] as $k => $d ){
 					if( !empty($d)){
 
 					if(is_int( $k ) ){

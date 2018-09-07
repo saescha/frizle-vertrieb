@@ -12,24 +12,26 @@
 <div class="customers form large-9 medium-8 columns content">
     <?= $this->Form->create($customer) ?>
     <fieldset>
-        <legend><?= __('Markt bearbeiten') ?></legend>
+        <legend><?= __('Markt hinzuf&uuml;gen') ?></legend>
         <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('city', array('label' => 'Stadt'));
-            echo $this->Form->input('plz', array('label' => 'Postleitzahl'));
-            echo $this->Form->input('street', array('label' => 'Straße'));
-                        echo $this->Form->input('category_id', ['options' => $categories, 'empty' => true]);
-            if ($this->request->session()->read('Auth.User.role') == 'admin') {
-                echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
-            }
+            echo $this->Form->input('Customer.name');
+            echo $this->Form->input('Customer.city', array('label' => 'Stadt'));
+            echo $this->Form->input('Customer.plz', array('label' => 'Postleitzahl'));
+            echo $this->Form->input('Customer.street', array('label' => 'Straße'));
+            echo $this->Form->input('Customer.category_id', ['options' => $categories, 'empty' => true]);
+                        if ($this->request->session()->read('Auth.User.role') == 'admin') {
+                            echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
+                        }
+
         ?>
+
     
-<?php
+	<?php
 foreach ($questions as $q) {
             if ($q->type == 'C') {
                 echo $this->Form->label($q->text);
                 foreach ($q->choices as $c) {
-                    echo $this->Form->input('C'. $c->id, [
+                    echo $this->Form->input('Question.'. $q->id, [
                             'type' => 'checkbox', 
                             'value' => $c->id, 
                             'label' => $c->text
@@ -41,13 +43,14 @@ foreach ($questions as $q) {
                 foreach ($q->choices as $c) {
                     array_push($radio, [ 'value' => $c->id , 'text' => $c->text ]);
                 }
-                echo $this->Form->input($q->id, ['options' => $radio, 'label' =>  $q->text ,'empty' => true]);
+                echo $this->Form->input('Question.'. $q->id, ['options' => $radio, 'label' =>  $q->text ,'empty' => true]);
             } elseif ($q->type == 'F') {
-                echo $this->Form->input($q->id, [ 'id' => $q->id , 'label' => $q->text ]);
+                echo $this->Form->input('Question.'. $q->id, [ 'id' => $q->id , 'label' => $q->text ]);
             }
         }
  ?>
  </fieldset>
     <?= $this->Form->button(__('Speichern')) ?>
     <?= $this->Form->end() ?>
+
 </div>
