@@ -23,36 +23,31 @@
                 echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
             }
         ?>
-    </fieldset>
-	<?php
-
+    
+<?php
 foreach ($questions as $q) {
-    echo '<div>';
-    echo $q->text;
-    echo '</div>';
-    echo  '<fieldset>';
-    if ($q->type == 'C') {
-        foreach ($q->choices as $c) {
-            echo '<label>';
-            echo $this->Form->checkbox('C'. $c->id, [
-    'value' => $c->id
-    ]);
-            echo $c->text;
-            echo '</label>';
+            if ($q->type == 'C') {
+                echo $this->Form->label($q->text);
+                foreach ($q->choices as $c) {
+                    echo $this->Form->input('C'. $c->id, [
+                            'type' => 'checkbox', 
+                            'value' => $c->id, 
+                            'label' => $c->text
+                            ]);
+                   
+                }
+            } elseif ($q->type == 'R') {
+                $radio = array();
+                foreach ($q->choices as $c) {
+                    array_push($radio, [ 'value' => $c->id , 'text' => $c->text ]);
+                }
+                echo $this->Form->input($q->id, ['options' => $radio, 'label' =>  $q->text ,'empty' => true]);
+            } elseif ($q->type == 'F') {
+                echo $this->Form->input($q->id, [ 'id' => $q->id , 'label' => $q->text ]);
+            }
         }
-    } elseif ($q->type == 'R') {
-        $radio = array();
-        foreach ($q->choices as $c) {
-            array_push($radio, [ 'value' => $c->id , 'text' => $c->text ]);
-        }
-        echo $this->Form->radio($q->id, $radio);
-    } elseif ($q->type == 'F') {
-        echo $this->Form->input($q->id, [ 'id' => $q->id , 'label' => '' ]);
-    }
-    echo '</fieldset>';
-}
-
  ?>
+ </fieldset>
     <?= $this->Form->button(__('Speichern')) ?>
     <?= $this->Form->end() ?>
 </div>
