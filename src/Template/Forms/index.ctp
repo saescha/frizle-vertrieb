@@ -30,8 +30,6 @@
                 <td><?= date_format($form->created,'d.m.Y H:i' ) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['action' => 'view', $form->id]) ?>
-
-                    <?= $this->Form->postLink(__('Entfernen'), ['action' => 'delete', $form->id], ['confirm' => __('Are you sure you want to delete # {0}?', $form->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

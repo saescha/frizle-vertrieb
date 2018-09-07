@@ -3,7 +3,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
 
-        <li><?= $this->Form->postLink(__('Kontaktformular löschen'), ['action' => 'delete', $form->id], ['confirm' => __('Are you sure you want to delete # {0}?', $form->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/forms/delete/<?= $form->id ?>' );"> Kontaktformular löschen </a>
 		<li><?= $this->Html->link(__('Neues Kontaktformular'), ['controller' => 'Questions', 'action' => 'answer']) ?></li>
 		<li><?= $this->Html->link(__('Neuen Markt anlegen'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
 

@@ -2,7 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
+        <li><a href="#" onclick="confirmNavigate('Sicher?','/users/delete/<?= $user->id ?>' );"> User l√∂schen </a>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
@@ -40,7 +40,7 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Assoziierte M‰rkte') ?></h4>
+        <h4><?= __('Assoziierte MÔøΩrkte') ?></h4>
         <?php if (!empty($user->customers)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -65,7 +65,6 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['controller' => 'Customers', 'action' => 'view', $customers->id]) ?>
                     <?= $this->Html->link(__('Bearbeiten'), ['controller' => 'Customers', 'action' => 'edit', $customers->id]) ?>
-                    <?= $this->Form->postLink(__('Entfernen'), ['controller' => 'Customers', 'action' => 'delete', $customers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customers->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -92,7 +91,6 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ansehen'), ['controller' => 'Forms', 'action' => 'view', $forms->id]) ?>
                     <?= $this->Html->link(__('Bearbeiten'), ['controller' => 'Forms', 'action' => 'edit', $forms->id]) ?>
-                    <?= $this->Form->postLink(__('Entfernen'), ['controller' => 'Forms', 'action' => 'delete', $forms->id], ['confirm' => __('Are you sure you want to delete # {0}?', $forms->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
