@@ -71,13 +71,13 @@ class CustomersController extends AppController
 		
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
-            $customer = $this->Customers->patchEntity($customer, $this->request->data);
+            $customer = $this->Customers->patchEntity($customer, $this->request->data->Customer);
 			if ( $this->Auth->user('role') == 'user'){
 			$customer->user_id = $this->Auth->user('id');
 			}
             if ($this->Customers->save($customer)) {
 				$this->loadModel('Answers');
-				foreach( $this->request->data as $k => $d ){
+				foreach( $this->request->data->Question as $k => $d ){
 					if( !empty($d)){
 
 					if(is_int( $k ) ){
