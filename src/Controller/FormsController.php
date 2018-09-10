@@ -10,7 +10,6 @@ use \DateTime;
  */
 class FormsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -127,7 +126,14 @@ class FormsController extends AppController
 				}
 			}
 			$this->set('forms', $forms );
-			$this->set('shortQ', $shortQ );
+            $this->set('shortQ', $shortQ );
+            
+            if ($this->RequestHandler->isMobile()) {
+                $this->render('query_mobile');
+            }else{
+                $this->render('query');
+            }
+            
 		}
 		
 	}

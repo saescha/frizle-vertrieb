@@ -37,39 +37,37 @@
 <div class="forms index large-9 medium-8 columns content">
 	<?php if (isset($forms)): ?>
     <h3><?= sizeof($forms ) . ' Treffer' ?></h3>
-	
+	<tiny>
     <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Tag</th>
-                <th>Uhrzeit</th>
-                <th>Markt</th>
-                <th>Stadt</th>
-				
-				<?php foreach ($shortQ as $sq): ?>
-				<th><?= $sq->short ?></th>
-
-				<?php endforeach; ?>
-                <th class="actions"><?= __('Aktionen') ?></th>
-            </tr>
-        </thead>
         <tbody>
             <?php foreach ($forms as $form): ?>
             <tr>
-                <td><?= date_format($form->created,'d.m.Y' )  ?></td>
-				<td><?= date_format($form->created,'H:i' ) ?></td>
-				<td><?= $form->customer->name ?></td>
-				<td><?= $form->customer->city ?></td>
-				<?php foreach ($shortQ as $sq): ?>
-				<td><?= !empty($form->shortA[$sq->id]) ? $form->shortA[$sq->id] : 'k.A.' ?></td>
+			<table cellpadding="0" cellspacing="0">
 
+			<thead>
+			<tr>
+                <th><?= date_format($form->created,'d.m.Y H:i' )  ?></th>
+				<th><?= $form->customer->name ?></th>
+				<th><?= $form->customer->city ?></th>
+			</tr>
+			</thead>
+			</table>
+			<table class="vertical-table">
+			<tr><th></th>
+				 <td><?= $this->Html->link(__('Ansehen'), ['action' => 'view', $form->id]) ?></td>
+				 </tr>
+			    <?php foreach ($shortQ as $sq): ?>
+				<tr>
+				<th><?= $sq->short ?></th>
+				<td><?= !empty($form->shortA[$sq->id]) ? $form->shortA[$sq->id] : 'k.A.' ?></td>
+				</tr>
 				<?php endforeach; ?>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $form->id]) ?>
-                </td>
+			</table>	
             </tr>
+
             <?php endforeach; ?>
         </tbody>
     </table>
+	</small>
 	<?php endif; ?>
 </div>
