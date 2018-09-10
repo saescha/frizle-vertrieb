@@ -117,7 +117,11 @@ class FormsController extends AppController
 				foreach($shortQ as $sq){
 					foreach($f->answers as $a){
 						if( $a->choice->question_id == $sq->id){
-							$f->shortA[$sq->id] = $a->choice->text;
+                            if (empty($a->choice->short)) {
+                                $f->shortA[$sq->id] = $a->choice->text;
+                            }else{
+                                $f->shortA[$sq->id] = $a->choice->short;
+                            }
 						}
 					}
 				}

@@ -52,6 +52,8 @@ class ChoicesTable extends Table
 
         $validator
             ->allowEmpty('text');
+        $validator
+            ->allowEmpty('short');
 
         return $validator;
     }
