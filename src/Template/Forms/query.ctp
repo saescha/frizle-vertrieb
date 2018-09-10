@@ -39,20 +39,6 @@
     <h3><?= sizeof($forms ) . ' Treffer' ?></h3>
 	<tiny>
     <table cellpadding="0" cellspacing="0">
-        <!-- <thead>
-            <tr>
-                <th>Tag</th>
-                <th>Uhrzeit</th>
-                <th>Markt</th>
-                <th>Stadt</th>
-				
-				<?php foreach ($shortQ as $sq): ?>
-				<th><?= $sq->short ?></th>
-
-				<?php endforeach; ?>
-                <th class="actions"><?= __('Aktionen') ?></th>
-            </tr>
-        </thead> -->
         <tbody>
             <?php foreach ($forms as $form): ?>
             <tr>
@@ -67,6 +53,9 @@
 			</thead>
 			</table>
 			<table class="vertical-table">
+			<tr><th></th>
+				 <td><?= $this->Html->link(__('Ansehen'), ['action' => 'view', $form->id]) ?></td>
+				 </tr>
 			    <?php foreach ($shortQ as $sq): ?>
 				<tr>
 				<th><?= $sq->short ?></th>
