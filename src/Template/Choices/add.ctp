@@ -15,6 +15,7 @@
         <?php
             echo $this->Form->input('question_id', ['options' => $questions, 'empty' => false]);
             echo $this->Form->input('text');
+            echo $this->Form->input('short');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Speichern')) ?>

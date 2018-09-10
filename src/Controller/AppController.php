@@ -86,8 +86,5 @@ class AppController extends Controller
     return false;
 }
 	
-    public function beforeFilter(Event $event)
-    {
-        //$this->Auth->allow(['index', 'view', 'display']);
-    }
+
 }
