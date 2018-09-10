@@ -35,11 +35,12 @@ foreach ($questions as $q) {
             if ($q->type == 'C') {
                 echo $this->Form->label($q->text);
                 foreach ($q->choices as $c) {
-                    echo $this->Form->input('Question.'. $q->id, [
-                            'type' => 'checkbox', 
-                            'value' => $c->id, 
-                            'label' => $c->text
+                    echo '<label>';
+                    echo $this->Form->checkbox('Question.'. $c->id, [
+                            'value' => $c->id
                             ]);
+                    echo $c->text;
+                    echo '</label>';
                    
                 }
             } elseif ($q->type == 'R') {
@@ -49,7 +50,7 @@ foreach ($questions as $q) {
                 }
                 echo $this->Form->input('Question.'. $q->id, ['options' => $radio, 'label' =>  $q->text ,'empty' => true]);
             } elseif ($q->type == 'F') {
-                echo $this->Form->input('Question.'. $q->id, [ 'id' => $q->id , 'label' => $q->text ]);
+                echo $this->Form->input('FQuestion.'. $q->id, [ 'id' => $q->id , 'label' => $q->text ]);
             }
         }
  ?>

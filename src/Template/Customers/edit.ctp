@@ -1,4 +1,6 @@
-<?php $this->assign('title', 'Märkte'); ?>
+<?php $this->assign('title', 'Märkte'); 
+  // $customer['Customer'] = $customer;
+?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Aktionen') ?></li>
@@ -10,7 +12,7 @@
     </ul>
 </nav>
 <div class="customers form large-9 medium-8 columns content">
-    <?= $this->Form->create($customer) ?>
+    <?= $this->Form->create($Customer) ?>
     <fieldset>
         <legend><?= __('Markt hinzuf&uuml;gen') ?></legend>
         <?php
@@ -31,21 +33,29 @@ foreach ($questions as $q) {
             if ($q->type == 'C') {
                 echo $this->Form->label($q->text);
                 foreach ($q->choices as $c) {
-                    echo $this->Form->input('Question.'. $q->id, [
-                            'type' => 'checkbox', 
-                            'value' => $c->id, 
-                            'label' => $c->text
+                    echo '<label>';
+                    echo $this->Form->checkbox('Question.'. $c->id, [
+                            'value' => $c->id,
+                            'checked' => !empty($c->answers)
                             ]);
+                    echo $c->text;
+                    echo '</label>';
                    
                 }
             } elseif ($q->type == 'R') {
                 $radio = array();
+                $value = null;
                 foreach ($q->choices as $c) {
+                    if(!empty($c->answers))$value=$c->id;
                     array_push($radio, [ 'value' => $c->id , 'text' => $c->text ]);
                 }
-                echo $this->Form->input('Question.'. $q->id, ['options' => $radio, 'label' =>  $q->text ,'empty' => true]);
+                echo $this->Form->input('Question.'. $q->id, ['options' => $radio, 'label' =>  $q->text ,'empty' => true, 'value' => $value]);
             } elseif ($q->type == 'F') {
-                echo $this->Form->input('Question.'. $q->id, [ 'id' => $q->id , 'label' => $q->text ]);
+                $value = null;
+                foreach ($q->choices as $c) {
+                    if(!empty($c->answers))$value=$c->text;
+                }
+                echo $this->Form->input('FQuestion.'. $q->id, [ 'id' => $q->id , 'label' => $q->text, 'value' => $value ]);
             }
         }
  ?>
