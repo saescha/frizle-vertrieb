@@ -34,7 +34,7 @@ class CustomersController extends AppController
         if ($this->request->is('post')) {
             return $this->redirect(['action' => 'view',$this->request->data['customer_id']]);
         }
-        $query = $this->Customers->find();
+        $query = $this->Customers->find()->select(['name', 'street','plz','city','id']);
         if ($this->Auth->user('role') <> 'admin') {
             $query->where(['Customers.user_id =' => $this->Auth->user('id')]);
         }

@@ -1,33 +1,37 @@
 <?php $this->assign('title','Märkte'); ?>
-<?= $this->Form->create(); ?>
+
 
 
 <script>
 var options = {
-  keys: ['name','city','plz','street'],
-  id: 'id'
+    // tokenize: true,
+    // matchAllTokens: true,
+    // shouldSort: true,
+    findAllMatches: true,
+    includeScore: true,
+  keys: ['name','city','plz','street']
 }
 
-var customers = <?= json_encode($customers ) ?>;
+var customers =  <?= json_encode($customers,JSON_UNESCAPED_UNICODE)  ?>;
 var fuse = new Fuse(customers,options)
 
-function search(string){
+function mysearch(string){
 	var results = fuse.search(string);
-	#('#resultTable').innerHTML = "";
-	results.foreach( (r) =>{
-		var row = #('<tr>');
-
-		row.append('<td>'+r.name +'</td>');
-		row.append('<td>'+r.city +'</td>');
-		row.append('<td>'+r.plz +'</td>');
-		row.append('<td>'+r.street +'</td>');
-	})
-
+	$('#resultTable').empty();
+	results.forEach( (r) =>{
+		var row = $('<tr>');
+		row.append('<td>'+r.item.name +'</td>');
+		row.append('<td>'+r.item.city +'</td>');
+		row.append('<td>'+r.item.plz +'</td>');
+		row.append('<td>'+r.item.street +'</td>');
+        row.append('<td>'+r.score +'</td>');
+        $("#resultTable").append(row);
+	});
 }
 </script>
 <div>
 
-<input type="text" id="search" placeholder="Markt auswählen" onchange="search(this.value)" >
+<input type="text" id="search" placeholder="Markt auswählen" onkeydown="mysearch(this.value);" >
 
 
 </div>
@@ -42,17 +46,13 @@ function search(string){
                 <th><?= $this->Paginator->sort('city','Stadt') ?></th>
                 <th><?= $this->Paginator->sort('plz','Postleitzahl') ?></th>
                 <th><?= $this->Paginator->sort('street','Straße') ?></th>
-   <!--         <th><?= $this->Paginator->sort('category_id','Kategorie') ?></th>
-                <th><?= $this->Paginator->sort('user_id') ?></th>
-                <th><?= $this->Paginator->sort('created','erstellt') ?></th>
-                <th><?= $this->Paginator->sort('modified','geändert') ?></th>  -->
                 <th class="actions"><?= __('Aktionen') ?></th>
             </tr>
         </thead>
         <tbody id="resultTable">
+        </tbody>
 	</table>
+
+
 </div>
 
-
-<?= $this->Form->button(__('Anzeigen')); ?>
-<?= $this->Form->end() ?>
