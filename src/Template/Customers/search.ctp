@@ -1,10 +1,10 @@
-<?php $this->assign('title','Märkte'); ?>
+<?php $this->assign('title', 'Märkte'); ?>
 
 
 <script>
 
 
-var customers =  <?= json_encode($customers,JSON_UNESCAPED_UNICODE)  ?>;
+var customers =  <?= json_encode($customers, JSON_UNESCAPED_UNICODE)  ?>;
 var last = {
     string: "",
     customers: []
@@ -30,6 +30,7 @@ function myfilter(string){
 }
 
 function mysearch(string){
+    if(string.length < 3)return;
     var results = myfilter(string);
     $('#resultTable').empty();
     results.forEach( (r) =>{
@@ -46,15 +47,16 @@ function mysearch(string){
 
 }
 </script>
-<div>
+
+
+<div class="customers index large-9 medium-8 columns content">
+    <h3><?= __('Märkte') ?></h3>
+    <div>
 
 <input type="text" id="search" placeholder="Markt auswählen" onkeyup="mysearch(this.value);" >
 
 
 </div>
-
-<div class="customers index large-9 medium-8 columns content">
-    <h3><?= __('Märkte') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
