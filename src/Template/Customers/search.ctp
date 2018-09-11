@@ -28,21 +28,21 @@ function mysearch(string){
         
         r.matches.forEach((m)=>{
             if(m.key==='name'){
-                var currentChar = 0;
-                var tt = $('<p>');
+                
                 m.indices.forEach((i)=>{
+                    var tt = $('<p>');
                     var part = $('<span>');
-                    part.append(r.item.name.substr(currentChar,i[0]));
+                    part.append(r.item.name.substring(0,i[0]));
                     tt.append(part);
                     part = $('<span>').css('color','red');
-                    part.append(r.item.name.substr(i[0],i[1]+1));
+                    part.append(r.item.name.substring(i[0],i[1]+1));
                     tt.append(part);
-                    currentChar = i[1]+1;
+                    part = $('<span>');
+                    part.append(r.item.name.substring(i[1]+1));
+                    tt.append(part);
+                    col.append(tt);
                 });
-                var part = $('<span>');
-                part.append(r.item.name.substr(currentChar));
-                tt.append(part);
-                col.append(tt);
+                
             }
         });
         row.append(col);
@@ -53,26 +53,47 @@ function mysearch(string){
         
         r.matches.forEach((m)=>{
             if(m.key==='city'){
-                var currentChar = 0;
-                var tt = $('<p>');
                 m.indices.forEach((i)=>{
+                    var tt = $('<p>');
                     var part = $('<span>');
-                    part.append(r.item.city.substr(currentChar,i[0]));
+                    part.append(r.item.city.substring(0,i[0]));
                     tt.append(part);
-                    part = $('<span>').css('color','red');;
-                    part.append(r.item.city.substr(i[0],i[1]+1));
+                    part = $('<span>').css('color','red');
+                    part.append(r.item.city.substring(i[0],i[1]+1));
                     tt.append(part);
-                    currentChar = i[1]+1;
+                    part = $('<span>');
+                    part.append(r.item.city.substring(i[1]+1));
+                    tt.append(part);
+                    col.append(tt);
                 });
-                var part = $('<span>');
-                part.append(r.item.city.substr(currentChar));
-                tt.append(part);
-                col.append(tt);
             }
         });
         row.append(col);
 
-		row.append('<td>'+r.item.plz +'</td>');
+        var col = $('<td>');
+        col.append('<h4>'+r.item.concat+'</h4>');
+
+        
+        r.matches.forEach((m)=>{
+            if(m.key==='concat'){
+                m.indices.forEach((i)=>{
+                    var tt = $('<p>');
+                    var part = $('<span>');
+                    part.append(r.item.concat.substring(0,i[0]));
+                    tt.append(part);
+                    part = $('<span>').css('color','red');
+                    part.append(r.item.concat.substring(i[0],i[1]+1));
+                    tt.append(part);
+                    part = $('<span>');
+                    part.append(r.item.concat.substring(i[1]+1));
+                    tt.append(part);
+                    col.append(tt);
+                });
+            }
+        });
+        row.append(col);
+
+
 		row.append('<td>'+r.item.street +'</td>');
         row.append('<td>'+r.score +'</td>');
         $("#resultTable").append(row);
@@ -92,10 +113,10 @@ function mysearch(string){
         <thead>
             <tr>
 
-                <th><?= $this->Paginator->sort('name','Name') ?></th>
-                <th><?= $this->Paginator->sort('city','Stadt') ?></th>
-                <th><?= $this->Paginator->sort('plz','Postleitzahl') ?></th>
-                <th><?= $this->Paginator->sort('street','Straße') ?></th>
+                <th>Name</th>
+                <th>Stadt</th>
+                <th>Concat</th>
+                <th>Straße</th>
                 <th class="actions"><?= __('Aktionen') ?></th>
             </tr>
         </thead>
