@@ -7,9 +7,11 @@ var options = {
     // tokenize: true,
     // matchAllTokens: true,
     // shouldSort: true,
-    findAllMatches: true,
+    // findAllMatches: true,
     includeScore: true,
-  keys: ['name','city','plz','street']
+    threshold: 0.6,
+    
+  keys: ['concat']
 }
 
 var customers =  <?= json_encode($customers,JSON_UNESCAPED_UNICODE)  ?>;

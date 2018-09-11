@@ -38,7 +38,12 @@ class CustomersController extends AppController
         if ($this->Auth->user('role') <> 'admin') {
             $query->where(['Customers.user_id =' => $this->Auth->user('id')]);
         }
-        $this->set('customers', $query->toArray());
+        $customers = $query->toArray();
+        foreach ( $customers as $c ) {
+            $c->concat = $c->name . ' ' . $c->city; 
+        }
+
+        $this->set('customers', $customers);
     }
 
     /**
