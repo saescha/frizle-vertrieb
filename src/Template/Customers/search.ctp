@@ -2,21 +2,10 @@
 
 
 <script>
-var options = {
-    // tokenize: true,
-    // matchAllTokens: true,
-    // shouldSort: true,
-    // findAllMatches: true,
-    includeScore: true,
-    includeMatches: true,
-    treshold: 0.1,
-    minMatchCharLength: 3,
-    
-  keys: ['concat']
-}
+
 
 var customers =  <?= json_encode($customers,JSON_UNESCAPED_UNICODE)  ?>;
-// var fuse = new Fuse(customers,options)
+
 function myfilter(string){
     var result = customers;
     string.toLowerCase().split(" ").forEach( (s) =>{
