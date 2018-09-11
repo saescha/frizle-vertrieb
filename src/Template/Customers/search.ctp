@@ -5,14 +5,24 @@
 
 
 var customers =  <?= json_encode($customers,JSON_UNESCAPED_UNICODE)  ?>;
-
+var last = {
+    string: "",
+    customers: []
+}
 function myfilter(string){
-    var result = customers;
+    if(last.string.indexOf(string) > - 1){
+        var result = last.customers;
+    }else{
+        var result = customers;
+    }
+
     string.toLowerCase().split(" ").forEach( (s) =>{
         result = result.filter( (r) =>{
             return r.concat.indexOf(s) > -1;
         })
     })
+    last.string = string;
+    last.customers = result;
     if(result){
         return result;
     }
