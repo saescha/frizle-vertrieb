@@ -9,95 +9,42 @@ var options = {
     // findAllMatches: true,
     includeScore: true,
     includeMatches: true,
+    treshold: 0.1,
     minMatchCharLength: 3,
     
-  keys: ['name','city']
+  keys: ['concat']
 }
 
 var customers =  <?= json_encode($customers,JSON_UNESCAPED_UNICODE)  ?>;
-var fuse = new Fuse(customers,options)
+// var fuse = new Fuse(customers,options)
+function myfilter(string){
+    var result = customers;
+    string.toLowerCase().split(" ").forEach( (s) =>{
+        result = result.filter( (r) =>{
+            return r.concat.indexOf(s) > -1;
+        })
+    })
+    if(result){
+        return result;
+    }
+    return [];
+}
 
 function mysearch(string){
-	var results = fuse.search(string);
-	$('#resultTable').empty();
-	results.forEach( (r) =>{
-		var row = $('<tr>');
-        var col = $('<td>');
-        col.append('<h4>'+r.item.name+'</h5>');
-
-        
-        r.matches.forEach((m)=>{
-            if(m.key==='name'){
-                
-                m.indices.forEach((i)=>{
-                    var tt = $('<p>');
-                    var part = $('<span>');
-                    part.append(r.item.name.substring(0,i[0]));
-                    tt.append(part);
-                    part = $('<span>').css('color','red');
-                    part.append(r.item.name.substring(i[0],i[1]+1));
-                    tt.append(part);
-                    part = $('<span>');
-                    part.append(r.item.name.substring(i[1]+1));
-                    tt.append(part);
-                    col.append(tt);
-                });
-                
-            }
-        });
-        row.append(col);
-
-        var col = $('<td>');
-        col.append('<h4>'+r.item.city+'</h4>');
-
-        
-        r.matches.forEach((m)=>{
-            if(m.key==='city'){
-                m.indices.forEach((i)=>{
-                    var tt = $('<p>');
-                    var part = $('<span>');
-                    part.append(r.item.city.substring(0,i[0]));
-                    tt.append(part);
-                    part = $('<span>').css('color','red');
-                    part.append(r.item.city.substring(i[0],i[1]+1));
-                    tt.append(part);
-                    part = $('<span>');
-                    part.append(r.item.city.substring(i[1]+1));
-                    tt.append(part);
-                    col.append(tt);
-                });
-            }
-        });
-        row.append(col);
-
-        var col = $('<td>');
-        col.append('<h4>'+r.item.concat+'</h4>');
-
-        
-        r.matches.forEach((m)=>{
-            if(m.key==='concat'){
-                m.indices.forEach((i)=>{
-                    var tt = $('<p>');
-                    var part = $('<span>');
-                    part.append(r.item.concat.substring(0,i[0]));
-                    tt.append(part);
-                    part = $('<span>').css('color','red');
-                    part.append(r.item.concat.substring(i[0],i[1]+1));
-                    tt.append(part);
-                    part = $('<span>');
-                    part.append(r.item.concat.substring(i[1]+1));
-                    tt.append(part);
-                    col.append(tt);
-                });
-            }
-        });
-        row.append(col);
-
-
-		row.append('<td>'+r.item.street +'</td>');
-        row.append('<td>'+r.score +'</td>');
+    var results = myfilter(string);
+    $('#resultTable').empty();
+    results.forEach( (r) =>{
+        var row = $('<tr>');
+        row.append('<td>'+r.name +'</td>');
+        row.append('<td>'+r.city +'</td>');
+        row.append('<td>'+r.plz +'</td>');
+        row.append('<td>'+r.street +'</td>');
+        row.append('<td><a href="/customers/view/'+r.id+'">Anzeigen</a></td>');
         $("#resultTable").append(row);
-	});
+    });
+
+    return;
+
 }
 </script>
 <div>
@@ -115,7 +62,7 @@ function mysearch(string){
 
                 <th>Name</th>
                 <th>Stadt</th>
-                <th>Concat</th>
+                <th>PLZ</th>
                 <th>Straße</th>
                 <th class="actions"><?= __('Aktionen') ?></th>
             </tr>

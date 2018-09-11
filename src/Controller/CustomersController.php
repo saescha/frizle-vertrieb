@@ -40,7 +40,7 @@ class CustomersController extends AppController
         }
         $customers = $query->toArray();
         foreach ( $customers as $c ) {
-            $c->concat = $c->name . ' ' . $c->city; 
+            $c->concat = strtolower (  $c->name . ' ' . $c->city ); 
         }
 
         $this->set('customers', $customers);
