@@ -1,42 +1,77 @@
-<?php $this->assign('title','Märkte'); ?>
-<?= $this->Form->create(); ?>
-
-<div>
+<?php $this->assign('title', 'Märkte'); ?>
 
 
-<input type="hidden" name="customer_id" id="search-hidden">
-<input type="text" id="search" placeholder="Markt auswählen" class="livesearch" data-list=".customer_list" autocomplete="off" >
+<script>
 
-<ul class="vertical customer_list" id="searchList" style="list-style-type: none;position: absolute;background: rgba(230, 240, 254, 1); z-index:1000;">
-<?php
-foreach( $customers as $cust ){
-	echo '<li value="'.$cust->id . '">'.$cust->name.', '.$cust->city.', '.$cust->street.'</li>';
+
+var customers =  <?= json_encode($customers, JSON_UNESCAPED_UNICODE)  ?>;
+var last = {
+    string: "",
+    customers: []
 }
-?>
-</ul>
-	<script>
-$('#search').keyup(function(elem){
-	$('#searchList').show();
-	$('#search-hidden').val('');
-});
-$('#search').hideseek({
-  highlight: true,
-  hidden_mode: true
-});
+function myfilter(string){
+    if(last.string.indexOf(string) > - 1){
+        var result = last.customers;
+    }else{
+        var result = customers;
+    }
 
-console.log($('#searchList li'))
-$('#searchList li').click(function(elem) {
-	$('#search').val($(this).text());
-	$('#search-hidden').val($(this).val());
-	$('#searchList').hide();
-});
+    string.toLowerCase().split(" ").forEach( (s) =>{
+        result = result.filter( (r) =>{
+            return r.concat.indexOf(s) > -1;
+        })
+    })
+    last.string = string;
+    last.customers = result;
+    if(result){
+        return result;
+    }
+    return [];
+}
 
+function mysearch(string){
+    if(string.length < 3)return;
+    var results = myfilter(string);
+    $('#resultTable').empty();
+    results.forEach( (r) =>{
+        var row = $('<tr>');
+        row.append('<td>'+r.name +'</td>');
+        row.append('<td>'+r.city +'</td>');
+        row.append('<td>'+r.plz +'</td>');
+        row.append('<td>'+r.street +'</td>');
+        row.append('<td><a href="/customers/view/'+r.id+'">Anzeigen</a></td>');
+        $("#resultTable").append(row);
+    });
+
+    return;
+
+}
 </script>
 
+
+<div class="customers index large-9 medium-8 columns content">
+    <h3><?= __('Märkte') ?></h3>
+    <div>
+
+<input type="text" id="search" placeholder="Markt auswählen" onkeyup="mysearch(this.value);" >
+
+
+</div>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Stadt</th>
+                <th>PLZ</th>
+                <th>Straße</th>
+                <th class="actions"><?= __('Aktionen') ?></th>
+            </tr>
+        </thead>
+        <tbody id="resultTable">
+        </tbody>
+	</table>
 
 
 </div>
 
-
-<?= $this->Form->button(__('Anzeigen')); ?>
-<?= $this->Form->end() ?>

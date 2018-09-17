@@ -10,7 +10,6 @@ use \DateTime;
  */
 class FormsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -117,13 +116,24 @@ class FormsController extends AppController
 				foreach($shortQ as $sq){
 					foreach($f->answers as $a){
 						if( $a->choice->question_id == $sq->id){
-							$f->shortA[$sq->id] = $a->choice->text;
+                            if (empty($a->choice->short)) {
+                                $f->shortA[$sq->id] = $a->choice->text;
+                            }else{
+                                $f->shortA[$sq->id] = $a->choice->short;
+                            }
 						}
 					}
 				}
 			}
 			$this->set('forms', $forms );
-			$this->set('shortQ', $shortQ );
+            $this->set('shortQ', $shortQ );
+            
+            if ($this->RequestHandler->isMobile()) {
+                $this->render('query_mobile');
+            }else{
+                $this->render('query');
+            }
+            
 		}
 		
 	}

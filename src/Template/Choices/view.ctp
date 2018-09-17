@@ -23,6 +23,10 @@
             <td><?= h($choice->text) ?></td>
         </tr>
         <tr>
+            <th><?= __('Kurztext') ?></th>
+            <td><?= h($choice->short) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $choice->id ?></td>
         </tr>
