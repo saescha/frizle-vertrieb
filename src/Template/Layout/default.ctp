@@ -15,7 +15,7 @@
 	<?= $this->Html->script('jquery.hideseek.min')?>
 	<?= $this->Html->script('jquery-ui-full.min')?>
 	<?= $this->Html->script('datepicker-de')?>
-    <?= $this->Html->script('fuse.min') ?>
+    <?= $this->Html->script('lunr.min') ?>
     <?= $this->Html->script('main')?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

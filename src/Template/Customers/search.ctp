@@ -5,41 +5,32 @@
 
 
 var customers =  <?= json_encode($customers, JSON_UNESCAPED_UNICODE)  ?>;
-var last = {
-    string: "",
-    customers: []
-}
-function myfilter(string){
-    if(last.string.indexOf(string) > - 1){
-        var result = last.customers;
-    }else{
-        var result = customers;
-    }
+var indexedCustomers = [];
+var idx = lunr(function () {
+//   this.ref('id');
+  this.field('name');
+  this.field('city');
+  this.field('street');
+  customers.forEach(function (cust) {
+    indexedCustomers[cust.id] = cust;
+    this.add(cust);
+  }, this);
+})
 
-    string.toLowerCase().split(" ").forEach( (s) =>{
-        result = result.filter( (r) =>{
-            return r.concat.indexOf(s) > -1;
-        })
-    })
-    last.string = string;
-    last.customers = result;
-    if(result){
-        return result;
-    }
-    return [];
-}
+
+
 
 function mysearch(string){
     if(string.length < 3)return;
-    var results = myfilter(string);
+    var results = idx.search(string);
     $('#resultTable').empty();
     results.forEach( (r) =>{
         var row = $('<tr>');
-        row.append('<td>'+r.name +'</td>');
-        row.append('<td>'+r.city +'</td>');
-        row.append('<td>'+r.plz +'</td>');
-        row.append('<td>'+r.street +'</td>');
-        row.append('<td><a href="/customers/view/'+r.id+'">Anzeigen</a></td>');
+        row.append('<td>'+indexedCustomers[r.ref].name +'</td>');
+        row.append('<td>'+indexedCustomers[r.ref].city +'</td>');
+        row.append('<td>'+indexedCustomers[r.ref].plz +'</td>');
+        row.append('<td>'+indexedCustomers[r.ref].street +'</td>');
+        row.append('<td><a href="/customers/view/'+r.ref+'">Anzeigen</a></td>');
         $("#resultTable").append(row);
     });
 
