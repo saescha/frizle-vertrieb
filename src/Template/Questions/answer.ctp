@@ -1,44 +1,86 @@
-<?= $this->Form->create(); ?>
+
+
+
+
+
 
 <div>
 
 <?php if($pcustomer_id){ ?>
-<input type="hidden" name="customer_id" id="search-hidden" value="<?= $pcustomer_id ?>">
+	<div class="customers form large-9 medium-8 columns content">
+	<?= $this->Form->create(); ?>
+	<input type="hidden" name="customer_id" id="search-hidden" value="<?= $pcustomer_id ?>">
 
 <?php }else{ ?>
-<input type="hidden" name="customer_id" id="search-hidden">
-<input type="text" id="search" placeholder="Markt auswählen" class="livesearch" data-list=".customer_list" autocomplete="off" >
-
-<ul class="vertical customer_list" id="searchList" style="list-style-type: none;position: absolute;background: rgba(230, 240, 254, 1); z-index:1000;">
-<?php
-foreach( $customers as $cust ){
-	echo '<li value="'.$cust->id . '">'.$cust->name.', '.$cust->city.', '.$cust->street.'</li>';
-}
-?>
-</ul>
 	<script>
-$('#search').keyup(function(elem){
-	$('#searchList').show();
-	$('#search-hidden').val('');
-});
-$('#search').hideseek({
-  highlight: true,
-  hidden_mode: true
-});
+ 
+ 
+ var customers =  <?= json_encode($customers, JSON_UNESCAPED_UNICODE)  ?>;
+ var last = {
+     string: "",
+     customers: []
+ }
+ function myfilter(string){
+     if(last.string.indexOf(string) > - 1){
+         var result = last.customers;
+     }else{
+         var result = customers;
+     }
+ 
+     string.toLowerCase().split(" ").forEach( (s) =>{
+         result = result.filter( (r) =>{
+             return r.concat.indexOf(s) > -1;
+         })
+     })
+     last.string = string;
+     last.customers = result;
+     if(result){
+         return result;
+     }
+     return [];
+ }
+ 
+ function mysearch(string){
+     if(string.length < 3)return;
+     var results = myfilter(string);
+     $('#resultTable').empty();
+     results.forEach( (r) =>{
+         var row = $('<tr>');
 
-console.log($('#searchList li'))
-$('#searchList li').click(function(elem) {
-	$('#search').val($(this).text());
-	$('#search-hidden').val($(this).val());
-	$('#searchList').hide();
-});
+         row.append('<td><input name="customer_id" value="' + r.id + '" type="radio" >'+r.name +'</td>');
+         row.append('<td>'+r.city +'</td>');
+         row.append('<td>'+r.street +'</td>');
+         
+         $("#resultTable").append(row);
+     });
+ 
+     return;
+ 
+ }
+ </script>
 
-</script>
-<?= $this->Html->link(__('Markt anlegen'), ['controller' => 'Customers', 'action' => 'add']); ?>
+	<input type="text" id="search" placeholder="Markt auswählen" onkeyup="mysearch(this.value);" >
+	<div class="customers form large-9 medium-8 columns content">
+	<?= $this->Html->link(__('Markt anlegen'), ['controller' => 'Customers', 'action' => 'add']); ?>
+	<?= $this->Form->create(); ?>
+
+	<table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Stadt</th>
+                <th>Straße</th>
+            </tr>
+        </thead>
+        <tbody id="resultTable">
+        </tbody>
+	</table>
+
+
 <?php } ?>
 
 
-</div>
+
 <?php 
 
 foreach( $questions as $q ){
@@ -68,10 +110,10 @@ elseif($q->type == 'R'){
 	echo $this->Form->input( $q->id, [ 'id' => $q->id , 'label' => '' ] );
 }
 echo '</fieldset>';
-
 	
 }
 
  ?>
 <?= $this->Form->button(__('Senden')); ?>
 <?= $this->Form->end() ?>
+</div>

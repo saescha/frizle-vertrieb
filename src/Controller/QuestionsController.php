@@ -27,14 +27,22 @@ class QuestionsController extends AppController
 		$this->set('questions',$query->toArray());
 
 		$this->loadModel('Customers');
-		$query = $this->Customers->find()->where(['Customers.user_id =' => $this->Auth->user('id')]);
+        $query = $this->Customers->find()->select(['name', 'street','plz','city','id']);
+        if ($this->Auth->user('role') <> 'admin') {
+            $query->where(['Customers.user_id =' => $this->Auth->user('id')]);
+        }
+        $customers = $query->toArray();
+        foreach ( $customers as $c ) {
+            $c->concat = strtolower (  $c->name . ' ' . $c->city ); 
+        }
 		
 		//debug( $query->toArray() );
-		$this->set('customers',$query->toArray());
+		$this->set('customers',$customers);
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$this->loadModel('Forms');
 			$form = $this->Forms->newEntity();
 			if(!isset($this->request->data['customer_id'])){
+                // TODO: check if authorized to create form for this customer
 				$this->Flash->error(__('Bitte Markt auswählen'));
 				return;
 			}
