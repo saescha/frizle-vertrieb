@@ -41,7 +41,7 @@ class QuestionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$this->loadModel('Forms');
 			$form = $this->Forms->newEntity();
-			if(!isset($this->request->data['customer_id'])){
+			if(!is_numeric($this->request->data['customer_id'])){
                 // TODO: check if authorized to create form for this customer
 				$this->Flash->error(__('Bitte Markt auswählen'));
 				return;

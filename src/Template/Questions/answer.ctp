@@ -43,13 +43,22 @@
  function mysearch(string){
      if(string.length < 3)return;
      var results = myfilter(string);
+     $('#customer_field').val('');
      $('#resultTable').empty();
      results.forEach( (r) =>{
          var row = $('<tr>');
 
-         row.append('<td><input name="customer_id" value="' + r.id + '" type="radio" >'+r.name +'</td>');
+         row.append('<td>'+r.name +'</td>');
          row.append('<td>'+r.city +'</td>');
          row.append('<td>'+r.street +'</td>');
+
+         row.click(()=>{
+            $('#resultTable').empty();
+            row.css('background-color','PowderBlue')
+            $('#resultTable').append(row);
+            $('#search').val(r.concat);
+            $('#customer_field').val(r.id);
+         });
          
          $("#resultTable").append(row);
      });
@@ -63,6 +72,8 @@
 	<div class="customers form large-9 medium-8 columns content">
 	<?= $this->Html->link(__('Markt anlegen'), ['controller' => 'Customers', 'action' => 'add']); ?>
 	<?= $this->Form->create(); ?>
+
+    <input type="hidden" name="customer_id" id="customer_field" value="">
 
 	<table cellpadding="0" cellspacing="0">
         <thead>
