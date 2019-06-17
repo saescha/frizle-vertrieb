@@ -53,21 +53,21 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Nachname') ?></th>
-                <th><?= __('Vorname') ?></th>
-    <!--            <th><?= __('Position') ?></th>
-                                <th><?= __('Telefon') ?></th>
+                <th><?= __(' ') ?></th>
+    <!--            <th><?= __('Position') ?></th>  -->
+                                <th><?= __('Tel') ?></th>
                                 <th><?= __('Mobil') ?></th>
-                                <th><?= __('Email') ?></th> -->
-                <th class="actions"><?= __('Aktionen') ?></th>
+                                <th><?= __('Mail') ?></th>
+                <th class="actions"><?= __(' ') ?></th>
             </tr>
             <?php foreach ($customer->persons as $person): ?>
             <tr>
                 <td><?= $person->last_name ?></td>
                 <td><?= $person->first_name ?></td>
-        <!--        <td><?= $person->position ?></td>
-                <td><?= $person->phone1 ?></td>
-                <td><?= $person->phone2 ?></td>
-                <td><?= $person->email ?></td> -->
+        <!--        <td><?= $person->position ?></td> -->
+                <td><?= $this->Html->link($person->phone1, 'tel://'.$person->phone1) ?></td>
+                <td><?= $this->Html->link($person->phone2, 'tel://'.$person->phone1) ?></td>
+                <td><?= $this->Html->link($person->email, 'mailto:'.$person->email) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Details'), ['controller' => 'Persons', 'action' => 'view', $person->id]) ?>
                 </td>

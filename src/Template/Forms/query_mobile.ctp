@@ -27,7 +27,7 @@
 			}
 			echo $this->Form->input($name,['options' => $choices
 										  ,'label' => $f->text
-										  ,'empty' => true]);
+										  , 'empty' => true]);
 			 } ?>
 			</fieldset>
 <?= $this->Form->button(__('Anzeigen')); ?>

@@ -19,8 +19,8 @@
         <legend><?= __('Markt hinzuf&uuml;gen') ?></legend>
         <?php
             echo $this->Form->input('Customer.name');
+			echo $this->Form->input('Customer.plz', array('label' => 'Postleitzahl'));
             echo $this->Form->input('Customer.city', array('label' => 'Stadt'));
-            echo $this->Form->input('Customer.plz', array('label' => 'Postleitzahl'));
             echo $this->Form->input('Customer.street', array('label' => 'Straße'));
             echo $this->Form->input('Customer.category_id', ['options' => $categories, 'empty' => true]);
                         if ($this->request->session()->read('Auth.User.role') == 'admin') {

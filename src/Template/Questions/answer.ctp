@@ -118,7 +118,7 @@ elseif($q->type == 'R'){
 	echo $this->Form->radio( $q->id , $radio );
 	
 }elseif($q->type == 'F'){
-	echo $this->Form->input( $q->id, [ 'id' => $q->id , 'label' => '' ] );
+	echo $this->Form->textarea( $q->id, [ 'id' => $q->id , 'label' => '', 'rows' => 1 ] );
 }
 echo '</fieldset>';
 	
